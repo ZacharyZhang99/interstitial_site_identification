@@ -1,0 +1,200 @@
+LAMMPS (7 Feb 2024 - Update 1)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+units                         metal
+boundary                      p p p
+atom_style                    atomic
+dimension                     3
+atom_modify                   map yes
+
+read_data                     9_combined_structure.data
+Reading data file ...
+  orthogonal box = (-12.807239 -12.474884 -8.1000093) to (38.421718 12.474884 16.200019)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  1902 atoms
+  read_data CPU = 0.068 seconds
+
+pair_style                    eam/alloy
+pair_coeff                    * * Mishin-Ni-Al-2009.eam.alloy Al Al Ni
+
+neighbor                      0.3 bin
+neigh_modify                  delay 10
+
+group                         1 type 1
+576 atoms in group 1
+group                         2 type 2
+1248 atoms in group 2
+group                         3 type 3
+78 atoms in group 3
+
+delete_atoms                  overlap 2.5 3 2
+System init for delete_atoms ...
+Neighbor list info ...
+  update: every = 1 steps, delay = 10 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 6.58721
+  ghost atom cutoff = 6.58721
+  binsize = 3.293605, bins = 16 8 8
+  2 neighbor lists, perpetual/occasional/extra = 1 1 0
+  (1) command delete_atoms, occasional
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+  (2) pair eam/alloy, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+Deleted 34 atoms, new total = 1868
+
+write_data                    GB_int.data
+System init for write_data ...
+Neighbor list info ...
+  update: every = 1 steps, delay = 10 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 6.58721
+  ghost atom cutoff = 6.58721
+  binsize = 3.293605, bins = 16 8 8
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/alloy, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+
+clear
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+
+units                         metal
+boundary                      p p p
+atom_style                    atomic
+dimension                     3
+atom_modify                   map yes
+
+read_data                     GB_int.data
+Reading data file ...
+  orthogonal box = (-12.807239 -12.474884 -8.1000093) to (38.421718 12.474884 16.200019)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  1868 atoms
+  reading velocities ...
+  1868 velocities
+  read_data CPU = 0.010 seconds
+
+pair_style                    eam/alloy
+pair_coeff                    * * Mishin-Ni-Al-2009.eam.alloy Al Al Ni
+
+neighbor                      0.3 bin
+neigh_modify                  delay 10
+
+group                         1 type 1
+576 atoms in group 1
+group                         2 type 2
+1248 atoms in group 2
+group                         3 type 3
+44 atoms in group 3
+
+delete_atoms                  overlap 2.5 3 3
+System init for delete_atoms ...
+Neighbor list info ...
+  update: every = 1 steps, delay = 10 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 6.58721
+  ghost atom cutoff = 6.58721
+  binsize = 3.293605, bins = 16 8 8
+  2 neighbor lists, perpetual/occasional/extra = 1 1 0
+  (1) command delete_atoms, occasional
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+  (2) pair eam/alloy, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+Deleted 0 atoms, new total = 1868
+
+compute                       vol all voronoi/atom
+run                           0
+WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
+Neighbor list info ...
+  update: every = 1 steps, delay = 10 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 6.58721
+  ghost atom cutoff = 6.58721
+  binsize = 3.293605, bins = 16 8 8
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/alloy, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 3.525 | 3.525 | 3.525 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0             -6299.2569      0             -6299.2569      1055.1285    
+Loop time of 8.19e-07 on 1 procs for 0 steps with 1868 atoms
+
+244.2% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 8.19e-07   |            |       |100.00
+
+Nlocal:           1868 ave        1868 max        1868 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           3775 ave        3775 max        3775 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:          70436 ave       70436 max       70436 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 70436
+Ave neighs/atom = 37.706638
+Neighbor list builds = 0
+Dangerous builds = 0
+
+dump                          1 3 custom 1 *.dump id type x y z c_vol[1]
+run                           0
+WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
+Per MPI rank memory allocation (min/avg/max) = 3.525 | 3.525 | 3.525 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0             -6299.2569      0             -6299.2569      1055.1285    
+Loop time of 6.85e-07 on 1 procs for 0 steps with 1868 atoms
+
+292.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 6.85e-07   |            |       |100.00
+
+Nlocal:           1868 ave        1868 max        1868 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           3775 ave        3775 max        3775 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:          70436 ave       70436 max       70436 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 70436
+Ave neighs/atom = 37.706638
+Neighbor list builds = 0
+Dangerous builds = 0
+
+write_data                    delete_int.data
+System init for write_data ...
+
+Total wall time: 0:00:00
