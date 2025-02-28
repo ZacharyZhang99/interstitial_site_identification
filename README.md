@@ -22,5 +22,7 @@ Compile LAMMPS using the following CMake command:
 
 
 cmake -C ../cmake/presets/most.cmake -C ../cmake/presets/nolib.cmake -DCMAKE_C_COMPILER=/usr/bin/mpicc -D BUILD_SHARED_LIBS=yes -D LAMMPS_MACHINE=mpi -DCMAKE_CXX_COMPILER=/usr/bin/mpicxx -DPKG_PYTHON=yes -D DOWNLOAD_KIM=yes -D PKG_KIM=on -D LAMMPS_EXCEPTIONS=yes -D PKG_MANYBODY=yes ../cmake
+
 make
+
 make install-python
